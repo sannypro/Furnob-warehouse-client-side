@@ -1,6 +1,7 @@
 import React from 'react';
 import Banner from '../Banner/Banner';
 import Inventory from '../Inventory/Inventory';
+import InventorySection from '../InventorySection/InventorySection';
 import ThinkingSection from '../ThinkingSection/ThinkingSection';
 
 const Home = () => {
@@ -22,6 +23,7 @@ const Home = () => {
             </div>
             <ThinkingSection></ThinkingSection>
             <Inventory></Inventory>
+            <InventorySection></InventorySection>
         </div>
     );
 };

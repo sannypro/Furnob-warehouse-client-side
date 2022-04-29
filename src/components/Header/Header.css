@@ -5,3 +5,7 @@
 .nav-border {
     border-bottom: 2px solid #e5dcdc;
 }
+
+.navbar-style {
+    text-decoration: none;
+}

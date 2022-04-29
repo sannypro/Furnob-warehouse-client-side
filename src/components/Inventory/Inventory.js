@@ -13,7 +13,7 @@ const Inventory = () => {
     return (
         <div className='row g-3 justify-content-center'>
             {
-                products.map(product => <div className='col-lg-4 d-flex g-3 justify-content-center'>
+                products.map(product => <div className='col-lg-4 d-flex g-3 mt-5 justify-content-center'>
                     <div className="card " style={{ width: " 18rem" }}>
                         <img src={product.img} className="card-img-top" alt="..." />
                         <div className="card-body">
