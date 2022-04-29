@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
+import { Container, Nav, Navbar, } from 'react-bootstrap';
 import Banner from '../Banner/Banner';
 
 import './Header.css'
@@ -23,7 +23,7 @@ const Header = () => {
                 </Navbar>
 
             </div>
-            <Banner />
+
         </div>
 
     );
