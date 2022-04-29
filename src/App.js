@@ -9,6 +9,7 @@ import SignUp from './components/SignUp/SignUp';
 import { ToastContainer } from 'react-toastify';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 import SingleProduct from './components/SingleProduct/SingleProduct';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
