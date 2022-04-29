@@ -18,7 +18,7 @@ const Header = () => {
                         <Navbar.Brand className='navbar-style'><Link style={{ textDecoration: 'none' }} to="/">React-Bootstrap</Link></Navbar.Brand>
                         <Navbar.Toggle aria-controls="basic-navbar-nav" />
                         <Navbar.Collapse id="basic-navbar-nav">
-                            <Nav className="me-auto navbar-style">
+                            <Nav className="me-auto navbar-style align-items-center">
                                 <Nav.Link ><NavLink style={{ textDecoration: 'none' }} to="/">Home</NavLink> </Nav.Link>
                                 <Nav.Link ><NavLink style={{ textDecoration: 'none' }} to="/login">Login</NavLink> </Nav.Link>
                                 {

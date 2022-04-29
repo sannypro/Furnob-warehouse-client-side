@@ -32,7 +32,7 @@ const Banner = () => {
                             <div className='ms-5'>
 
 
-                                <div><img src={bannerImg} alt="" /></div>
+                                <div><img className='img-fluid' src={bannerImg} alt="" /></div>
 
                             </div>
 
@@ -63,7 +63,7 @@ const Banner = () => {
 
 
                                 <div>
-                                    <img src={bannerImg2} alt="" />
+                                    <img className='img-fluid' src={bannerImg2} alt="" />
                                 </div>
                             </div>
 

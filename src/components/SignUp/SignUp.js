@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useCreateUserWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import { useCreateUserWithEmailAndPassword, useSendEmailVerification, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import GoogleLogo from "../../assets/img/google.svg"
 import auth from '../firebase.init';
+import { toast } from 'react-toastify';
 
 const SignUp = () => {
     const [signInWithGoogle, googleUser, googleLoading, goolgeError] = useSignInWithGoogle(auth);
@@ -15,7 +16,8 @@ const SignUp = () => {
         user,
         loading,
         error,
-    ] = useCreateUserWithEmailAndPassword(auth);
+    ] = useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
+    const [sendEmailVerification, sending, VerificationError] = useSendEmailVerification(auth);
     console.log(error);
     const handleEmailChange = e => {
         setEmail(e.target.value)
@@ -26,7 +28,7 @@ const SignUp = () => {
     const handleConfirmPassword = e => {
         setConfirmPass(e.target.value)
     }
-    const handleSignup = e => {
+    const handleSignup = async (e) => {
         e.preventDefault()
 
         if (password !== confirmPass) {
@@ -35,8 +37,11 @@ const SignUp = () => {
             return
         }
         createUserWithEmailAndPassword(email, password)
+        await sendEmailVerification();
+        toast('Verification mail sent')
 
     }
+
     return (
         <div>
             <div className='mt-5 d-flex align-items-center justify-content-center '>
@@ -56,10 +61,10 @@ const SignUp = () => {
                     </div>
                     <Link to="/login"><h6 className='mt-3'> Already have an account? Login</h6></Link>
                     {
-                        codeError && <p>{codeError}</p>
+                        codeError && <p style={{ color: 'red' }}>{codeError}</p>
                     }
                     {
-                        error && <p>{error?.message}</p>
+                        error && <p style={{ color: 'red' }}>{error?.message}</p>
                     }
                     <button type="submit" className="btn btn-primary mt-3 w-100">Signup</button>
                     <div className='input-wrapper d-flex justify-content-center'>
