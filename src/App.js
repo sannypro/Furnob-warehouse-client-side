@@ -7,6 +7,8 @@ import { Route, Routes } from 'react-router-dom';
 import Login from './components/Login/Login';
 import SignUp from './components/SignUp/SignUp';
 import { ToastContainer } from 'react-toastify';
+import PrivateRoute from './components/PrivateRoute/PrivateRoute';
+import SingleProduct from './components/SingleProduct/SingleProduct';
 
 function App() {
   return (
@@ -16,6 +18,7 @@ function App() {
         <Route path='/' element={<Home></Home>}></Route>
         <Route path='/login' element={<Login></Login>}></Route>
         <Route path='/signup' element={<SignUp></SignUp>}></Route>
+        <Route path='/inventory/:inventoryId' element={<PrivateRoute><SingleProduct></SingleProduct></PrivateRoute>}></Route>
       </Routes>
       <ToastContainer />
     </div >

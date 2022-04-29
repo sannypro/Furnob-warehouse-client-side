@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { useSendPasswordResetEmail, useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
-import { Link } from 'react-router-dom';
+import { useSendPasswordResetEmail, useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import GoogleLogo from "../../assets/img/google.svg"
 import auth from '../firebase.init';
@@ -8,6 +8,8 @@ import './Login.css';
 
 
 const Login = () => {
+    const navigate = useNavigate()
+    const [signInWithGoogle, googleUser, googleLoading, goolgeError] = useSignInWithGoogle(auth);
     const [
         signInWithEmailAndPassword,
         user,
@@ -28,6 +30,15 @@ const Login = () => {
     const handleSubmit = e => {
         e.preventDefault()
         signInWithEmailAndPassword(email, password)
+
+    }
+    let location = useLocation();
+    let from = location?.state?.from?.pathname || "/";
+    if (user || googleUser) {
+
+
+        navigate(from, { replace: true })
+
 
     }
     const hanldePassworReset = async (e) => {
@@ -61,14 +72,14 @@ const Login = () => {
 
 
                 <div className='input-wrapper d-flex justify-content-center'>
-                    <button className='google-auth btn w-100 d-flex justify-content-around border mt-2'>
+                    <button onClick={async () => await signInWithGoogle()} className='google-auth btn w-100 d-flex justify-content-around border mt-2'>
                         <img src={GoogleLogo} alt='' />
                         <p className='mt-2'> Continue with Google </p>
                     </button>
                 </div>
-            </form>
+            </form >
 
-        </div>
+        </div >
     );
 };
 
