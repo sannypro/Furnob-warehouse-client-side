@@ -10,6 +10,7 @@ import { ToastContainer } from 'react-toastify';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 import SingleProduct from './components/SingleProduct/SingleProduct';
 import 'react-toastify/dist/ReactToastify.css';
+import ManageInvenrory from './components/ManageInvetories/ManageInvenrory';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path='/login' element={<Login></Login>}></Route>
         <Route path='/signup' element={<SignUp></SignUp>}></Route>
         <Route path='/inventory/:inventoryId' element={<PrivateRoute><SingleProduct></SingleProduct></PrivateRoute>}></Route>
+        <Route path='/inventories' element={<PrivateRoute><ManageInvenrory></ManageInvenrory></PrivateRoute>}></Route>
       </Routes>
       <ToastContainer />
     </div >
