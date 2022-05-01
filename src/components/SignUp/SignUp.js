@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useCreateUserWithEmailAndPassword, useSendEmailVerification, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import GoogleLogo from "../../assets/img/google.svg"
 import auth from '../firebase.init';
 import { toast } from 'react-toastify';
+import { async } from '@firebase/util';
 
 const SignUp = () => {
     const [signInWithGoogle, googleUser, googleLoading, goolgeError] = useSignInWithGoogle(auth);
@@ -18,7 +19,7 @@ const SignUp = () => {
         error,
     ] = useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
     const [sendEmailVerification, sending, VerificationError] = useSendEmailVerification(auth);
-    console.log(error);
+
     const handleEmailChange = e => {
         setEmail(e.target.value)
     }
@@ -36,44 +37,67 @@ const SignUp = () => {
             setCodeError("two password mismatched")
             return
         }
+
+
         createUserWithEmailAndPassword(email, password)
         await sendEmailVerification();
-        toast('Verification mail sent')
 
+
+
+
+    }
+    const navigate = useNavigate()
+    let location = useLocation();
+    let from = location?.state?.from?.pathname || "/";
+    if (user || googleUser) {
+        navigate(from, { replace: true })
+    }
+    const handleGoogle = async e => {
+        e.preventDefault()
+        await signInWithGoogle()
+    }
+    if (user) {
+        toast('Verification mail sent')
     }
 
     return (
         <div>
             <div className='mt-5 d-flex align-items-center justify-content-center '>
-                <form onSubmit={handleSignup}>
-                    <div className="mb-3">
-                        <label className="form-label">Email address</label>
-                        <input onChange={handleEmailChange} type="email" className="form-control" name="email" aria-describedby="emailHelp" />
-                        <div id="emailHelp" className="form-text">We'll never share your email with anyone else.</div>
-                    </div>
-                    <div className="mb-3">
-                        <label className="form-label">Password</label>
-                        <input onChange={hanldePasswordChange} type="password" className="form-control" name="password" />
-                    </div>
-                    <div className="">
-                        <label className="form-label">confirm Passoword</label>
-                        <input onChange={handleConfirmPassword} type="password" className="form-control" name="confirmPassword" />
-                    </div>
-                    <Link to="/login"><h6 className='mt-3'> Already have an account? Login</h6></Link>
-                    {
-                        codeError && <p style={{ color: 'red' }}>{codeError}</p>
-                    }
-                    {
-                        error && <p style={{ color: 'red' }}>{error?.message}</p>
-                    }
-                    <button type="submit" className="btn btn-primary mt-3 w-100">Signup</button>
-                    <div className='input-wrapper d-flex justify-content-center'>
-                        <button onClick={() => signInWithGoogle()} className='google-auth btn w-100 d-flex justify-content-around border mt-3'>
+                <div>
+                    <form onSubmit={handleSignup}>
+                        <div className="mb-3">
+                            <label className="form-label">Email address</label>
+                            <input onChange={handleEmailChange} type="email" className="form-control" name="email" required />
+                            <div id="emailHelp" className="form-text">We'll never share your email with anyone else.</div>
+                        </div>
+                        <div className="mb-3">
+                            <label className="form-label">Password</label>
+                            <input onChange={hanldePasswordChange} type="password" className="form-control" required name="password" />
+                        </div>
+                        <div className="">
+                            <label className="form-label">confirm Passoword</label>
+                            <input onChange={handleConfirmPassword} type="password" className="form-control" required name="confirmPassword" />
+                        </div>
+                        <Link to="/login"><h6 className='mt-3'> Already have an account? Login</h6></Link>
+                        {
+                            codeError && <p style={{ color: 'red' }}>{codeError}</p>
+                        }
+                        {
+                            error && <p style={{ color: 'red' }}>{error?.message}</p>
+                        }
+                        {
+                            goolgeError && <p style={{ color: 'red' }}>{goolgeError?.message}</p>
+                        }
+                        <button type="submit" className="btn btn-primary mt-3 w-100">Signup</button>
+
+                    </form>
+                    <div className='mb-3 d-flex justify-content-center'>
+                        <button onClick={handleGoogle} className='google-auth btn w-100 d-flex justify-content-around border mt-3'>
                             <img src={GoogleLogo} alt='' />
                             <p className='mt-2'> Continue with Google </p>
                         </button>
                     </div>
-                </form>
+                </div>
 
             </div>
         </div>

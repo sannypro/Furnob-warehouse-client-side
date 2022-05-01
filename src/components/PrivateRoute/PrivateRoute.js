@@ -28,17 +28,17 @@ const PrivateRoute = ({ children }) => {
 
         return <Navigate to="/login" state={{ from: location }} replace />;
     }
-    if (!user.emailVerified) {
-        return <div className='text-center mt-5'>
-            <h3 className='text-danger'> your email is not verified</h3>
-            <button onClick={async () => {
-                await sendEmailVerification()
-                toast("verification mail sent")
-            }} className='btn btn-success'>
-                Please verify
-            </button>
-        </div>
-    }
+    //     if (!user.emailVerified) {
+    //         return <div className='text-center mt-5'>
+    //             <h3 className='text-danger'> your email is not verified</h3>
+    //             <button onClick={async () => {
+    //                 await sendEmailVerification()
+    //                 toast("verification mail sent")
+    //             }} className='btn btn-success'>
+    //                 Please verify
+    //             </button>
+    //         </div>
+    // }
     return children;
 
 

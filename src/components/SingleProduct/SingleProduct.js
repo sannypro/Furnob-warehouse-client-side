@@ -15,7 +15,7 @@ const SingleProduct = () => {
 
         }
         getProduct()
-    }, [product.quantity])
+    }, [])
 
     let newQuantity;
     const handleDelivered = async () => {
@@ -23,8 +23,13 @@ const SingleProduct = () => {
         newQuantity = productQuantity - 1
         product.quantity = newQuantity
         const newData = { quantity: product.quantity }
-        axios.put(`http://localhost:5000/inventory/${inventoryId}`, newData)
-            .then(response => setProduct(response.data))
+        await axios.put(`http://localhost:5000/inventory/${inventoryId}`, newData)
+        axios.get(`http://localhost:5000/inventory/${inventoryId}`)
+            .then(response => {
+                setProduct(response.data)
+                toast('Delivered successfully')
+            })
+
 
     }
     let reStock;
@@ -44,8 +49,13 @@ const SingleProduct = () => {
             return
         }
 
-        axios.put(`http://localhost:5000/inventory/${inventoryId}`, newReStockQuantity)
-            .then(response => setProduct(response.data))
+        await axios.put(`http://localhost:5000/inventory/${inventoryId}`, newReStockQuantity)
+        axios.get(`http://localhost:5000/inventory/${inventoryId}`)
+            .then(response => {
+                setProduct(response.data)
+                toast('Item Restock Successfully')
+            })
+
     }
 
     return (
@@ -78,7 +88,7 @@ const SingleProduct = () => {
                         <button type="submit" className="btn w-25 mx-auto btn-success mt-3">Submit</button>
                     </form>
                     <div className='text-center mt-4'>
-                        <button onClick={() => navigate('/inventories')} className='btn btn-success'>Manage Inventories</button>
+                        <button onClick={() => navigate('/manage-inventories')} className='btn btn-success'>Manage Inventories</button>
                     </div>
                 </div>
             </div>

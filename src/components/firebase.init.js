@@ -6,7 +6,7 @@ import { getAuth } from "firebase/auth";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-    apiKey: "AIzaSyAh0h6EhPqNUx9bDsmlPIrhtdcalm96TVU",
+    apiKey: process.env.REACT_APP_apiKey,
     authDomain: "furnob-furniture-warehouse.firebaseapp.com",
     projectId: "furnob-furniture-warehouse",
     storageBucket: "furnob-furniture-warehouse.appspot.com",

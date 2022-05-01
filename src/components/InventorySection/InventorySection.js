@@ -11,7 +11,7 @@ const InventorySection = () => {
                     <p>A furniture warehouse where modernity crosses elegance, we stock   Modern Sleek Designs Furniture. that would revamp your space into a one-of-a-kind home. furnob stock elegant furniture featuring a basic Nordic aesthetic. Every product of furnob Furniture warehouse is designed to emphasis on the minutiae of usage and longevity.</p>
                 </div >
                 <div className='col-lg-6'>
-                    <img className='img-fluid' src={inventoryImg} alt="" />
+                    <img className='img-fluid rounded-img' src={inventoryImg} alt="" />
                 </div>
             </div >
         </div>

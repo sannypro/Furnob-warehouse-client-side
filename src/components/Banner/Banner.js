@@ -1,77 +1,52 @@
-import React from 'react';
-import bannerImg from "../../assets/img/banner-image-22-removebg-preview.png";
+import React, { useState } from 'react';
+import bannerImg from "../../assets/img/banner-image-22-removebg-preview1.png";
 import bannerImg2 from "../../assets/img/shop-img24-removebg-preview.png"
 import './Banner.css';
 
 import 'swiper/css';
-import { Carousel, CarouselItem } from 'react-bootstrap';
+
 
 const Banner = () => {
+    const [slide, setSlide] = useState(false)
+
     return (
         <div className='bg-color'>
-            <Carousel className='row'>
-                <CarouselItem>
-                    <div className='d-flex justify-content-center  align-items-center container'>
+            <div className='d-flex justify-content-center align-items-center container'>
+
+
+                <div className='d-flex justify-content-center row align-items-center container'>
+                    <div className='col-lg-6'>
+                        <small>FURNITURE</small>
+
                         <div>
-                            <small>FURNITURE</small>
-
                             <div>
-                                <div>
-                                    <div className=''>
-                                        <h1>Beauty indoors</h1>
-                                        <p className=''> The perfect place for every contemporay durniture and manufacturer.This is Furnob Warehouse</p>
-                                    </div>
+                                <div className=''>
+                                    <h1>Beauty indoors</h1>
+                                    <p className=''> The perfect place for every contemporay durniture and manufacturer.This is Furnob Warehouse</p>
                                 </div>
-
-                            </div>
-
-
-
-                        </div>
-                        <div className='d-flex justify-content-end w-75'>
-                            <div className='ms-5'>
-
-
-                                <div><img className='img-fluid' src={bannerImg} alt="" /></div>
-
                             </div>
 
                         </div>
+
+
+
                     </div>
-                </CarouselItem>
-                <CarouselItem>
-                    <div className='d-flex justify-content-center  align-items-center container'>
+                    <div className='d-flex justify-content-end col-lg-6 '>
                         <div>
-                            <small>FURNITURE</small>
-
-                            <div>
-                                <div>
-                                    <div className=''>
-                                        <h1>Better Interior</h1>
-                                        <p className=''> The perfect place for every contemporay durniture and manufacturer.This is Furnob Warehouse</p>
-                                    </div>
-                                </div>
-
-                            </div>
 
 
+                            <div><img className='img-fluid banner-img' src={bannerImg} alt="" /></div>
 
                         </div>
-                        <div className='d-flex justify-content-end w-75'>
-                            <div className='ms-5'>
 
-
-
-                                <div>
-                                    <img className='img-fluid' src={bannerImg2} alt="" />
-                                </div>
-                            </div>
-
-                        </div>
                     </div>
-                </CarouselItem>
-            </Carousel>
-        </div>
+                </div>
+
+
+
+
+            </div>
+        </div >
     );
 };
 

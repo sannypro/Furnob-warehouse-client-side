@@ -1,5 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const ManageInvenrory = () => {
     const [inventories, setInventories] = useState([])
@@ -8,27 +10,48 @@ const ManageInvenrory = () => {
             .then(response => setInventories(response.data))
     }, [inventories])
 
-    const handleDelete = id => {
-        axios.delete(`http://localhost:5000/inventory/${id}`)
+    const handleDelete = async id => {
+        await axios.delete(`http://localhost:5000/inventory/${id}`)
+        toast('Item deleted')
 
     }
+    const navigate = useNavigate()
     return (
-        <div className='row g-3 justify-content-center'>
-            {
-                inventories.map(product => <div key={product._id} className='col-lg-4 d-flex g-3 mt-5 justify-content-center'>
-                    <div className="card " style={{ width: " 18rem" }}>
-                        <img src={product.img} className="card-img-top" alt="..." />
-                        <div className="card-body">
-                            <h5 className="card-title">{product.name}</h5>
-                            <p className="card-text">{product.description}</p>
-                            <p>Price:${product.price}</p>
-                            <p>Quantity:{product.quantity}</p>
-                            <button onClick={() => handleDelete(product._id)} className='btn btn-danger'>Delete</button>
+        <div className='row  justify-content-center'>
 
-                        </div>
-                    </div>
-                </div>)
-            }
+
+            <div className='container '>
+                <div className='text-center mt-3'>
+                    <button onClick={() => navigate("/add-inventory-item")} className='btn btn-success'>Add New item</button>
+                </div>
+                <table className="table table-striped container">
+                    <thead>
+                        <tr>
+
+                            <th scope="col">ID</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Quantity</th>
+
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            inventories.map(product => <tr key={product._id}>
+                                <td><button data-bs-toggle="tooltip" data-bs-placement="top" className='btn' title={product._id}>{product._id.slice(0, 5)}...</button></td>
+                                <td>{product.name}</td>
+                                <td>{product.quantity}</td>
+
+                                <td><button onClick={() => handleDelete(product._id)} className='btn btn-danger'>Delete</button></td>
+                            </tr>)
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+
+
+
         </div>
     );
 };

@@ -11,6 +11,9 @@ import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 import SingleProduct from './components/SingleProduct/SingleProduct';
 import 'react-toastify/dist/ReactToastify.css';
 import ManageInvenrory from './components/ManageInvetories/ManageInvenrory';
+import AddInventory from './components/AddInventory/AddInventory';
+import NotFound from './components/NotFoundPage/NotFound';
+import MyItems from './components/MyItems/MyItems';
 
 function App() {
   return (
@@ -21,9 +24,13 @@ function App() {
         <Route path='/login' element={<Login></Login>}></Route>
         <Route path='/signup' element={<SignUp></SignUp>}></Route>
         <Route path='/inventory/:inventoryId' element={<PrivateRoute><SingleProduct></SingleProduct></PrivateRoute>}></Route>
-        <Route path='/inventories' element={<PrivateRoute><ManageInvenrory></ManageInvenrory></PrivateRoute>}></Route>
-      </Routes>
+        <Route path='/manage-inventories' element={<PrivateRoute><ManageInvenrory></ManageInvenrory></PrivateRoute>}></Route>
+        <Route path='/add-inventory-item' element={<PrivateRoute><AddInventory></AddInventory></PrivateRoute>}></Route>
+        <Route path='/my-items' element={<PrivateRoute><MyItems></MyItems></PrivateRoute>}></Route>
+        <Route path='*' element={<NotFound></NotFound>}></Route>
+      </Routes >
       <ToastContainer />
+
     </div >
   );
 }
