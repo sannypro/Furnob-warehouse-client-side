@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { toast } from 'react-toastify';
 import auth from '../firebase.init';
+import Modal from 'react-modal/lib/components/Modal';
 
 const MyItems = () => {
     const [user] = useAuthState(auth)
@@ -21,6 +22,39 @@ const MyItems = () => {
 
 
     }
+    const customStyles = {
+        content: {
+            top: '50%',
+            left: '50%',
+            right: 'auto',
+            bottom: 'auto',
+            marginRight: '-50%',
+            transform: 'translate(-50%, -50%)',
+        },
+    };
+    const [saved, setSaved] = useState(false)
+    const [id, setId] = useState('')
+    if (saved) {
+        handleDelete(id)
+        setSaved(false)
+
+    }
+
+    let subtitle;
+    const [modalIsOpen, setIsOpen] = React.useState(false);
+
+    function openModal() {
+        setIsOpen(true);
+    }
+
+    function afterOpenModal() {
+        // references are now sync'd and can be accessed.
+        subtitle.style.color = '#f00';
+    }
+
+    function closeModal() {
+        setIsOpen(false);
+    }
     return (
         <div className='container'>
             <h1 className='text-center'>your items : {myItems.length}</h1>
@@ -35,12 +69,35 @@ const MyItems = () => {
                                 <p>Price:${product.price}</p>
                                 <p>Quantity:{product.quantity}</p>
                                 <p className='mb-5'>Supllier: {product.supplier}</p>
-                                <button onClick={() => handleDelete(product._id)} className='btn btn-danger'>Delete</button>
+                                <button onClick={() => {
+                                    openModal()
+                                    setId(product._id)
+                                }} className='btn btn-danger'>Delete</button>
                             </div>
                         </div>
                     </div>)
                 }
             </div>
+            <Modal
+                isOpen={modalIsOpen}
+                onAfterOpen={afterOpenModal}
+                onRequestClose={closeModal}
+                style={customStyles}
+                contentLabel="Example Modal"
+            >
+                <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Alert</h2>
+                <div>Are You sure You want to delete</div>
+                <div className='d-flex justify-content-around'>
+                    <button className='mt-4 btn btn-success' onClick={closeModal}>close</button>
+                    <button className='mt-4 btn btn-danger' onClick={() => {
+                        closeModal()
+                        setSaved(true)
+                    }}>Delete</button>
+                </div>
+
+
+
+            </Modal>
         </div>
     );
 };

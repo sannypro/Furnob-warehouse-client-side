@@ -1,5 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { Button } from 'react-bootstrap';
+import Modal from 'react-modal/lib/components/Modal';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
@@ -15,7 +17,41 @@ const ManageInvenrory = () => {
         toast('Item deleted')
 
     }
+
     const navigate = useNavigate()
+    const customStyles = {
+        content: {
+            top: '50%',
+            left: '50%',
+            right: 'auto',
+            bottom: 'auto',
+            marginRight: '-50%',
+            transform: 'translate(-50%, -50%)',
+        },
+    };
+    const [saved, setSaved] = useState(false)
+    const [id, setId] = useState('')
+    if (saved) {
+        handleDelete(id)
+        setSaved(false)
+
+    }
+
+    let subtitle;
+    const [modalIsOpen, setIsOpen] = React.useState(false);
+
+    function openModal() {
+        setIsOpen(true);
+    }
+
+    function afterOpenModal() {
+        // references are now sync'd and can be accessed.
+        subtitle.style.color = '#f00';
+    }
+
+    function closeModal() {
+        setIsOpen(false);
+    }
     return (
         <div className='row  justify-content-center'>
 
@@ -42,7 +78,15 @@ const ManageInvenrory = () => {
                                 <td>{product.name}</td>
                                 <td>{product.quantity}</td>
 
-                                <td><button onClick={() => handleDelete(product._id)} className='btn btn-danger'>Delete</button></td>
+
+                                <td> <Button variant="danger" onClick={() => {
+
+                                    openModal()
+                                    setId(product._id)
+
+                                }}>
+                                    Delete
+                                </Button></td>
                             </tr>)
                         }
                     </tbody>
@@ -50,7 +94,26 @@ const ManageInvenrory = () => {
             </div>
 
 
+            <Modal
+                isOpen={modalIsOpen}
+                onAfterOpen={afterOpenModal}
+                onRequestClose={closeModal}
+                style={customStyles}
+                contentLabel="Example Modal"
+            >
+                <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Alert</h2>
+                <div>Are You sure You want to delete</div>
+                <div className='d-flex justify-content-around'>
+                    <button className='mt-4 btn btn-success' onClick={closeModal}>close</button>
+                    <button className='mt-4 btn btn-danger' onClick={() => {
+                        closeModal()
+                        setSaved(true)
+                    }}>Delete</button>
+                </div>
 
+
+
+            </Modal>
 
         </div>
     );
