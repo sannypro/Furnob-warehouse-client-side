@@ -14,6 +14,8 @@ import ManageInvenrory from './components/ManageInvetories/ManageInvenrory';
 import AddInventory from './components/AddInventory/AddInventory';
 import NotFound from './components/NotFoundPage/NotFound';
 import MyItems from './components/MyItems/MyItems';
+import Blogs from './components/Blogs/Blogs';
+import Footer from './components/Footer/Footer';
 
 function App() {
   return (
@@ -27,9 +29,11 @@ function App() {
         <Route path='/manage-inventories' element={<PrivateRoute><ManageInvenrory></ManageInvenrory></PrivateRoute>}></Route>
         <Route path='/add-inventory-item' element={<PrivateRoute><AddInventory></AddInventory></PrivateRoute>}></Route>
         <Route path='/my-items' element={<PrivateRoute><MyItems></MyItems></PrivateRoute>}></Route>
+        <Route path='/blogs' element={<Blogs></Blogs>}></Route>
         <Route path='*' element={<NotFound></NotFound>}></Route>
       </Routes >
       <ToastContainer />
+      <Footer></Footer>
 
     </div >
   );

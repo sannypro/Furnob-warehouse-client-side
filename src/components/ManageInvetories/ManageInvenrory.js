@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 const ManageInvenrory = () => {
     const [inventories, setInventories] = useState([])
     useEffect(() => {
-        axios.get('http://localhost:5000/')
+        axios.get('http://localhost:5000/inventories')
             .then(response => setInventories(response.data))
     }, [inventories])
 
@@ -37,7 +37,7 @@ const ManageInvenrory = () => {
                     </thead>
                     <tbody>
                         {
-                            inventories.map(product => <tr key={product._id}>
+                            inventories?.map(product => <tr key={product._id}>
                                 <td><button data-bs-toggle="tooltip" data-bs-placement="top" className='btn' title={product._id}>{product._id.slice(0, 5)}...</button></td>
                                 <td>{product.name}</td>
                                 <td>{product.quantity}</td>

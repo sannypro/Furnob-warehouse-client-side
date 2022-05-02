@@ -23,7 +23,7 @@ const MyItems = () => {
     }
     return (
         <div className='container'>
-            <h1 className='text-center'>your items</h1>
+            <h1 className='text-center'>your items : {myItems.length}</h1>
             <div className='row'>
                 {
                     myItems.map(product => <div key={product._id} className='col-lg-4 relative d-flex  mt-5 justify-content-center'>

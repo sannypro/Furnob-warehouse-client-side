@@ -5,6 +5,7 @@ import GoogleLogo from "../../assets/img/google.svg"
 import auth from '../firebase.init';
 import { toast } from 'react-toastify';
 import { async } from '@firebase/util';
+import { Spinner } from 'react-bootstrap';
 
 const SignUp = () => {
     const [signInWithGoogle, googleUser, googleLoading, goolgeError] = useSignInWithGoogle(auth);
@@ -87,6 +88,9 @@ const SignUp = () => {
                         }
                         {
                             goolgeError && <p style={{ color: 'red' }}>{goolgeError?.message}</p>
+                        }
+                        {
+                            loading && <Spinner animation="border" variant="warning" />
                         }
                         <button type="submit" className="btn btn-primary mt-3 w-100">Signup</button>
 

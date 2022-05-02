@@ -9,7 +9,7 @@ const AddInventory = () => {
     const [user] = useAuthState(auth)
     const { register, handleSubmit } = useForm();
     const onSubmit = (data, e) => {
-        axios.post('http://localhost:5000/', { ...data, email: user.email })
+        axios.post('http://localhost:5000/inventories', { ...data, email: user.email })
             .then(response => {
                 console.log(response.data)
                 toast("New item Added")

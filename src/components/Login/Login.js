@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useState } from 'react';
+import { Spinner } from 'react-bootstrap';
 import { useSendPasswordResetEmail, useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -75,6 +76,9 @@ const Login = () => {
                     }
                     {
                         goolgeError && <p style={{ color: 'red' }}>{goolgeError?.message}</p>
+                    }
+                    {
+                        loading && <Spinner animation="border" variant="warning" />
                     }
                     <div>
                         <button type="submit" className="btn btn-primary w-100 mt-3">Login</button>

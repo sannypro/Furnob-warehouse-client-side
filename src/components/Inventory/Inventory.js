@@ -9,7 +9,7 @@ const Inventory = () => {
     const navigate = useNavigate()
     const [products, setProducts] = useState([])
     useEffect(() => {
-        axios.get('http://localhost:5000/')
+        axios.get('http://localhost:5000/inventories')
             .then(response => setProducts(response.data))
     }, [])
     const sliceProducts = products.slice(0, 6)
