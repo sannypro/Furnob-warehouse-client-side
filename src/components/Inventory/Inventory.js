@@ -27,7 +27,7 @@ const Inventory = () => {
                             <p>Price:${product.price}</p>
                             <p>Quantity:{product.quantity}</p>
                             <p className='mb-5'>Supllier: {product.supplier}</p>
-                            <button onClick={() => navigate(`/inventory/${product._id}`)} className="btn position-absolute bottom-0  btn-primary">update</button>
+                            <button onClick={() => navigate(`/inventory/${product._id}`)} className="btn position-absolute bottom-0  " style={{ backgroundColor: "#e4d0d0" }}>update</button>
                         </div>
                     </div>
                 </div>)

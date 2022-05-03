@@ -22,7 +22,7 @@ const Header = () => {
                             <Nav className="me-auto navbar-style align-items-center">
                                 <Nav.Link ><NavLink style={{ textDecoration: 'none', color: "black" }} to="/">Home</NavLink> </Nav.Link>
                                 <Nav.Link ><NavLink style={{ textDecoration: 'none', color: "black" }} to="/blogs">Blogs</NavLink> </Nav.Link>
-                                <Nav.Link ><NavLink style={{ textDecoration: 'none', color: "black" }} to="/login">Login</NavLink> </Nav.Link>
+
 
                                 {
                                     user && <Nav.Link ><NavLink style={{ textDecoration: 'none', color: "black" }} to="/manage-inventories">Manage Items</NavLink> </Nav.Link>
@@ -34,7 +34,7 @@ const Header = () => {
                                     user && <Nav.Link ><NavLink style={{ textDecoration: 'none', color: "black" }} to="/my-items">My Items</NavLink> </Nav.Link>
                                 }
                                 {
-                                    user && <Nav.Link > <button onClick={() => signOut(auth)} className="btn btn-danger">Sign out</button> </Nav.Link>
+                                    user ? <Nav.Link > <button onClick={() => signOut(auth)} className="btn btn-danger">Sign out</button> </Nav.Link> : <Nav.Link ><NavLink style={{ textDecoration: 'none', color: "black" }} to="/login">Login</NavLink> </Nav.Link>
                                 }
 
                             </Nav>

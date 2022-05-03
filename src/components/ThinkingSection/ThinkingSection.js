@@ -1,5 +1,5 @@
 import React from 'react';
-import thinkingImg from '../../assets/img/home-2-img-5.jpg'
+import thinkingImg from '../../assets/img/6-pimage1-ht-501-008-01-ht-501-008-02-ht-501-008-03.jpg'
 
 import './ThinkingSection.css'
 const ThinkingSection = () => {

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { Button, Spinner } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import Modal from 'react-modal/lib/components/Modal';
 import { useNavigate } from 'react-router-dom';
 import { useAuthState } from 'react-firebase-hooks/auth';
@@ -24,7 +24,7 @@ const ManageInvenrory = () => {
             toast('Item deleted')
         }
         else {
-            toast('You cant delete this. Because you did not add this item')
+            toast('You cant delete this. Because you did not add this item. PLease add first')
         }
     }
 
