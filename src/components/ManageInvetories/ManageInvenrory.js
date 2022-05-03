@@ -1,21 +1,31 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, Spinner } from 'react-bootstrap';
 import Modal from 'react-modal/lib/components/Modal';
 import { useNavigate } from 'react-router-dom';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import { toast } from 'react-toastify';
+import auth from '../firebase.init';
 
 const ManageInvenrory = () => {
+    const [user] = useAuthState(auth)
     const [inventories, setInventories] = useState([])
+
     useEffect(() => {
         axios.get('https://salty-ridge-21738.herokuapp.com/inventories')
             .then(response => setInventories(response.data))
+
     }, [inventories])
 
     const handleDelete = async id => {
-        await axios.delete(`https://salty-ridge-21738.herokuapp.com/inventory/${id}`)
-        toast('Item deleted')
 
+        if (deleteUserEmail === user.email) {
+            await axios.delete(`https://salty-ridge-21738.herokuapp.com/inventory/${id}`)
+            toast('Item deleted')
+        }
+        else {
+            toast('You cant delete this. Because you did not add this item')
+        }
     }
 
     const navigate = useNavigate()
@@ -31,11 +41,13 @@ const ManageInvenrory = () => {
     };
     const [saved, setSaved] = useState(false)
     const [id, setId] = useState('')
+    const [deleteUserEmail, setDeleteUserEmail] = useState('')
     if (saved) {
-        handleDelete(id)
+        handleDelete(id, deleteUserEmail)
         setSaved(false)
 
     }
+
 
     let subtitle;
     const [modalIsOpen, setIsOpen] = React.useState(false);
@@ -60,7 +72,7 @@ const ManageInvenrory = () => {
                 <div className='text-center mt-3'>
                     <button onClick={() => navigate("/add-inventory-item")} className='btn btn-success'>Add New item</button>
                 </div>
-                <table className="table table-striped container">
+                <table className="table table-striped w-50 container">
                     <thead>
                         <tr>
 
@@ -83,6 +95,7 @@ const ManageInvenrory = () => {
 
                                     openModal()
                                     setId(product._id)
+                                    setDeleteUserEmail(product?.email)
 
                                 }}>
                                     Delete
