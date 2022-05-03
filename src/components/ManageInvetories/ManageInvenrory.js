@@ -76,8 +76,8 @@ const ManageInvenrory = () => {
                     <thead>
                         <tr>
 
-                            <th scope="col">ID</th>
                             <th scope="col">Name</th>
+                            <th scope="col">Image</th>
                             <th scope="col">Quantity</th>
 
                             <th scope="col">Action</th>
@@ -86,8 +86,9 @@ const ManageInvenrory = () => {
                     <tbody>
                         {
                             inventories?.map(product => <tr key={product._id}>
-                                <td><button data-bs-toggle="tooltip" data-bs-placement="top" className='btn' title={product._id}>{product._id.slice(0, 5)}...</button></td>
+
                                 <td>{product.name}</td>
+                                <td><img className='img-fluid' src={product.img} alt="" /></td>
                                 <td>{product.quantity}</td>
 
 
