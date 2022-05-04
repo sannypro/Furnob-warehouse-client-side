@@ -4,7 +4,7 @@
 
 # Project description
 
-This project is for furniture warehouse management website. Here you can login and can add item for stock. IF he wish he can also delivered it and can delete item... all will be stored in database. DELETE,UPDATE,ADD will be real time througe mongoDB
+This project is for furniture warehouse management website. Here user can login and can add item for stock. IF he wish he can also delivered it and can delete item... all will be stored in database. DELETE,UPDATE,ADD will be real time througe mongoDB
 
 # Project Features
 - MongoDB implemented
