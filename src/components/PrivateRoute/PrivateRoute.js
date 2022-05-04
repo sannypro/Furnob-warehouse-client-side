@@ -28,6 +28,11 @@ const PrivateRoute = ({ children }) => {
 
         return <Navigate to="/login" state={{ from: location }} replace />;
     }
+
+
+    // i will do it after assignment
+
+
     //     if (!user.emailVerified) {
     //         return <div className='text-center mt-5'>
     //             <h3 className='text-danger'> your email is not verified</h3>

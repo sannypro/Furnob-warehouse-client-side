@@ -18,14 +18,18 @@ const ManageInvenrory = () => {
     }, [inventories])
 
     const handleDelete = async id => {
+        await axios.delete(`https://salty-ridge-21738.herokuapp.com/inventory/${id}`)
+        toast('Item deleted')
 
-        if (deleteUserEmail === user.email) {
-            await axios.delete(`https://salty-ridge-21738.herokuapp.com/inventory/${id}`)
-            toast('Item deleted')
-        }
-        else {
-            toast('You cant delete this. Because you did not add this item. PLease add first')
-        }
+        // i will do this after assignment
+
+
+
+        // if (deleteUserEmail === user.email) {
+
+        // else {
+        //     toast('You cant delete this. Because you did not add this item. PLease add first')
+        // }
     }
 
     const navigate = useNavigate()
